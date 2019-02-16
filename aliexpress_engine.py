@@ -1,5 +1,5 @@
 from driver import setup_driver
-import pickle, time, os, json, csv, sys
+import pickle, time, os, json, csv, sys, threading
 
 from selenium import webdriver
 import requests
@@ -9,22 +9,38 @@ import matplotlib
 from datetime import datetime
 from bs4 import BeautifulSoup
 
+
 class AliExpress_Engine():
     def __init__(self, url, product_id):
         self.url = url
         self.product_id = product_id
-        self.driver = setup_driver()
-
         mode = input("Search or Analysis mode?\n").lower()
-        if (mode == "search"):
+        if (mode == "search" or mode == "s"):
             print("Ok. Running Search mode...")
 
-        elif (mode == "analysis"):
+        elif (mode == "analysis" or mode == "a"):
             print("Ok. Running Analysis mode...")
-            self.run_product_analysis()
+            self.setup_soup_and_driver()
 
 
-    def run_product_analysis(self):
+
+    def setup_soup_and_driver(self):
+        self.driver = setup_driver()
         self.driver.get(self.url)
-        self.content = self.driver.page_source
+        content = self.driver.page_source
+        self.soup = BeautifulSoup(content, 'html.parser')
+        print(self.has_epacket_shipping())
+
+    def get_total_num_reviews(self):
+        self.soup.find()
+    
+    def has_epacket_shipping(self):
+        shipping_company = self.soup.find('span', {'id': 'j-shipping-company'}).text
+        if (not shipping_company or shipping_company == ""):
+            return False
+        return True
+
+
+    
+
     
