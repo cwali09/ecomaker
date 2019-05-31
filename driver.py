@@ -7,14 +7,14 @@ import os
 
 def setup_driver():
     # Set Firefox driver
-    # driver = webdriver.Firefox()
+    driver = webdriver.Firefox()
 
     # Set headless Chrome Driver
-    chrome_options = Options()
-    chrome_options.set_headless(headless=True)
+    #chrome_options = Options()
+    #chrome_options.set_headless(headless=True)
     
     # For Windows OS
-    driver = webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe"), chrome_options = chrome_options)
+    #driver = webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe"), chrome_options = chrome_options)
     # For Mac/Linux OS
     #driver = webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe"), chrome_options = chrome_options)
 

@@ -26,21 +26,16 @@ class AliExpress_Engine():
 
     def setup_soup_and_driver(self):
         self.driver = setup_driver()
-        self.driver.get(self.url)
+        # self.driver.get(self.url)
         content = self.driver.page_source
         self.soup = BeautifulSoup(content, 'html.parser')
         print(self.has_epacket_shipping())
 
     def get_total_num_reviews(self):
-        self.soup.find()
+        self.soup.find('')
     
     def has_epacket_shipping(self):
         shipping_company = self.soup.find('span', {'id': 'j-shipping-company'}).text
         if (not shipping_company or shipping_company == ""):
             return False
         return True
-
-
-    
-
-    
