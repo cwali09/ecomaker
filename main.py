@@ -17,7 +17,6 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from time import sleep
 #import scrapy
-#from mobilenium import mobidriver
 
 from aliexpress_engine import AliExpress_Engine
 from driver import setup_driver
@@ -51,10 +50,6 @@ def get_previous_sellers():
         line = file.readline()
     file.close()
     return prev_loaded_sellers
-#hengshuihongzhumedicaltechnologycoltd
-#grahopenewmaterialstechnologiesinc
-#hengshuigangshengmedicalinstrumentscoltd
-#zhongshanchukuangtextilecoltd
 
 def save_seller_to_file(seller):
     file = open("prev_contacted_sellers.txt", 'a+b')
@@ -87,7 +82,6 @@ try:
 except:
     input("Manual user login is required. Press any key when you're done logging in to continue.")
 
-#keyword = input("Enter required keyword: ")
 driver.get(search_url + keyword)
 response = requests.get(search_url + keyword)
 
@@ -149,7 +143,9 @@ for item in items:
             print("Saving {seller} to file...".format(seller=seller))
             file.write(seller)
 
+            # UNCOMMENT TO START SENDING EMAILS
             #send_inquiry_btn.click()
+            
             sleep(1)
             driver.get(search_url + keyword)
     except NoSuchElementException:
@@ -170,6 +166,7 @@ for item in items:
 
 print(filtered_names)
 file.close()
+driver.close()
 
 
 
